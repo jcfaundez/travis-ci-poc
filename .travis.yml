@@ -2,4 +2,11 @@ language: java
 jdk: 
   - openjdk17
 sudo: false
-script: ./mvnw clean install && ls -lst
+#script: ./mvnw clean install && ls -lst
+addons:
+  sonarcloud:
+    organization: "travistis" # the key of the org you chose at step #3
+    token: 8b67c69e19810b0e9724975a33ebf608b7fb89cd # encrypted value of your token
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean install  sonar:sonar -Pcoverage -Dsonar.projectKey=travistis-webgoat -DskipTests
