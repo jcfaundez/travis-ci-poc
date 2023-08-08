@@ -1,8 +1,18 @@
+language: java
+jdk:
+- openjdk17
 sudo: false
-
+addons:
+  sonarcloud:
+    organization: travistis
+    token: 
+      secure: "TfrNTGVIvqRnF3JpfA0nm8jhVBivlanYAFgqWzkaklIP0sn/A3MSgiuzFZdBHsAmM//CykdBPqM7nPjljoqArTN5piEkoNalmIaUqFLXlaSlCbLaLsAp8ionb1Rm9SZBh5z4ozjVswLi19MWN4qv2ck6bUJQeL2/El1PvRpJG4JTul7t+M25VqKD3RRXR5QuJxpzDfeA0j/HYHHplccf6JVHoPIIDYuvXiQNai/YS9zI7On4q4s2qj3UpTlEqP6SpD2NHOApeNc1XX82tqg6bWkSm4NXZZzBjf2UHmgVJixz4Mid2PRejSymJokI6DZ9+9fw3/T8z9OvHjuKjinSOuF3N8Q8KrvGsgCZ2km+qCSDTcxfG71aYVGfUOGbWLnQw4ahj7xzrqctscwi/z00mKzXPdMzyM3KPn9XAfxI2/gzP0NGKOkaArGuR1NbZ+d+P6OaBySaYdvrKnN5p0/KplXELm9bvpqf7z7jy5ZfhpFLNXnPky6dhIj3qzQh3j7K7K+9MeynpGTOYPy5cT1vMBo2fzRVqI5aWA/tQwkKk1AG+fsCzzxKmaLQnSuzI0A+AcZvb6upKsTQZZjdbloVzsxDw5Y8R8TTm8Tp55c8zCNyxA2Z71l0AP0kBMI21KC0H1SyE43rM937e8+B82xyswIyL3/J5KOQPbVKyHeYtHU="
+cache:
+  directories:
+  - $HOME/.m2
 jobs:
   include:
-    - stage: unit tests
-      script: echo one
-    - stage: unit tests
-      script: echo two
+    - stage: "Maven clean"
+      script: mvn clean
+      name: "Maven and Sonar"
+      script: mvn install  sonar:sonar -Pcoverage -Dsonar.projectKey=travistis-webgoat -DskipTests
