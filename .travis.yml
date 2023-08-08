@@ -5,7 +5,9 @@ sudo: false
 addons:
   sonarcloud:
     organization: travistis
-    token: SONAR_API 
+    token:
+      secure: oOfzpHmlwHF8Zha8wVnrvHZ+w9fDIPwx80pJzViZAccrZMZeHL0Dgd8PnjR5Gi4NZGt1AzTNt6NNUANQM+JbyzlFJOKKFDt5Ht8KcN9/7I228rP17qM/dQYyVi5eOK4+12MVQA0ajhCo5ibkwU3TUU4cBl3e4ySko6le/tt0tdwuC0brBTV6aAuk19LnLx50t4w2H6Vu9O9LeOBsJERUchZP4xNDfb9G+U2+GetpM13FazOq4C06BJxWpcPKS+pH55EVNxL5ukVw/20jmtVsfEe4v4ZP41Ya/VDWNQh8affZ2t29jSHLN/T7SFq5mImclbA3QayQPmi7/XvtqbaH9inwkrdHrzZlOSJD6Kpp4cH7rn5kmRllQYLvqRyHnyZhvyMGIqrtPdXbjCZawToG85L4Gj4VDka7XHoFF0rOC8vnXndz0FotYlTk/+ltywxjITZ8dhUG1JxH+V7gyHA8ghxrPN5xzFWYjsqlsCF1QtgSiqQ9AbDIW89KodtlO5bVf+R+w0POoBuyHIgG8aqozdPm3TvIT2QOrT0Yx4TH08secjbyeEqcL1zIqmLJrNyzN6kaTEKNcDysU0Ji1/4WFkY5SbB7R0vI9BKKkdAyAkR+Th/OFqBPCREkCqA5t2CG51pgLhv4hKJPLKOPtE+3phgsiJnxnmshvYC9X4JeNiQ=
+
 script:
 - mvn clean install  sonar:sonar -Pcoverage -Dsonar.projectKey=travistis-webgoat -DskipTests
 env:
