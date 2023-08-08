@@ -12,6 +12,7 @@ cache:
   - $HOME/.m2
 jobs:
   include:
-    - stage: Maven and Sonar
+    - stage: "Maven and Sonar"
+      name: "Maven and Sonar"
       script:
         - mvn clean install  sonar:sonar -Pcoverage -Dsonar.projectKey=travistis-webgoat -DskipTests
