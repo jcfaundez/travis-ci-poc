@@ -14,5 +14,5 @@ jobs:
   include:
     - stage: "Maven clean"
       script: mvn clean
-      name: "Maven and Sonar"
+    - stage:  "Maven and Sonar"
       script: mvn install  sonar:sonar -Pcoverage -Dsonar.projectKey=travistis-webgoat -DskipTests
