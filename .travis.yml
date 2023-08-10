@@ -14,7 +14,7 @@ jobs:
   include:
     - stage: "Maven clean"
       script: mvn clean
-    - stage:  "Maven and Sonar"
+    - stage:  "Maven build"
       script: mvn install  sonar:sonar -Pcoverage -Dsonar.projectKey=travistis -DskipTests
     - stage: "Sign"
       keys:
