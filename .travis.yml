@@ -21,5 +21,6 @@ jobs:
         provider: heroku
         api_key: "adbc1946-0baa-4129-b0ab-023da093985f"
         app: travistis
+        skip_cleanup: true
         on:
           all_branches: true
