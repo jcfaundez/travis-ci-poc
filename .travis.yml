@@ -18,7 +18,7 @@ jobs:
       script: mvn install  sonar:sonar -Pcoverage -Dsonar.projectKey=travistis-webgoat -DskipTests
     - stage: "Sign"
       keys:
-         - SSH_KEY_FOR_SIGNING="$ssh-github"
+         - SSH_KEY_FOR_SIGNING="$firma.cosign"
 
       before_script: 
         - echo "$SSH_KEY_FOR_SIGNING" > cosign.key
