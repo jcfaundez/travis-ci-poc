@@ -12,28 +12,43 @@ cache:
   - $HOME/.m2
 jobs:
   include:
-    - stage: "Maven clean"
-      script: mvn clean
-    - stage:  "Maven and Sonar"
-      script: mvn install  sonar:sonar -Pcoverage -Dsonar.projectKey=travistis-webgoat -DskipTests
-    - stage: "Sign"
-      keys:
+    - name: "Push en Rama Feature"
+      if: branch = feat
+      stages:
+        - name: "Build"
+          script: mvn clean
+        - name:  "Maven and Sonar"
+          script: mvn install  sonar:sonar -Pcoverage -Dsonar.projectKey=travistis-webgoat -DskipTests
+    
+    - name: "Merge a rama Main"
+      if: branch = main
+      stages: 
+        - name: "Maven clean"
+          script: mvn clean
+          
+        - name:  "Build"
+          script: mvn compile
+          
+        - name: "Generate WAR"
+          script: mvn package
+          
+        - name: "Sign artifact"
+          keys:
          - SSH_KEY_FOR_SIGNING="$firma.cosign"
+          before_script: 
+            - echo "$SSH_KEY_FOR_SIGNING" > cosign.key
+            - chmod 600 cosign.key
+          script: 
+            - cosign sign --key cosign.key portalmonitoring.war
 
-      before_script: 
-        - echo "$SSH_KEY_FOR_SIGNING" > cosign.key
-        - chmod 600 cosign.key
-        
-      script: 
-        - cosign sign --key cosign.key portalmonitoring.war
-
-    - stage: "Deploy"
-      deploy:
-        provider: heroku
-        api_key: "adbc1946-0baa-4129-b0ab-023da093985f"
-        app: travistis
-        jdk: openjdk17
-        skip_cleanup: true
-        on:
-          branch: feat-caso2
+        - name: "Deploy"
+          deploy:
+            provider: heroku
+            api_key: "adbc1946-0baa-4129-b0ab-023da093985f"
+            app: travistis
+            jdk: openjdk17
+            skip_cleanup: true
+            on:
+              branch: feat-caso2
+      
       
