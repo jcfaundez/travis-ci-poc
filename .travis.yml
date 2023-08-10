@@ -25,5 +25,15 @@ jobs:
         - chmod 600 cosign.key
         
       script: 
-        - cosign sign --key cosign.key portalmonitoring.war 
+        - cosign sign --key cosign.key portalmonitoring.war
+
+    - stage: "Deploy"
+      deploy:
+        provider: heroku
+        api_key: "adbc1946-0baa-4129-b0ab-023da093985f"
+        app: travistis
+        jdk: openjdk17
+        skip_cleanup: true
+        on:
+          branch: feat-caso2
       
