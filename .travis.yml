@@ -49,6 +49,6 @@ jobs:
             jdk: openjdk17
             skip_cleanup: true
             on:
-              branch: feat-caso2
+              all_branches: true
       
       
