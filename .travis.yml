@@ -16,3 +16,8 @@ jobs:
       script: mvn clean
     - stage:  "Maven and Sonar"
       script: mvn install  sonar:sonar -Pcoverage -Dsonar.projectKey=travistis-webgoat -DskipTests
+    - stage: "Deploy"
+      deploy:
+        provider: heroku
+        api_key: "adbc1946-0baa-4129-b0ab-023da093985f"
+        app: travistis
